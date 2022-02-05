@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class Category {
   // Blueprint or model of a transaction
-  final String? id;
-  final String? title;
-  final Color? color;
-  final Image? image;
+  final String id;
+  final String title;
+  final Color color;
+  final String image;
 
   const Category(
       {required this.id,

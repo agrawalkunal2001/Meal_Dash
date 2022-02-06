@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'category_item.dart';
-import 'category_data.dart';
+import '../widgets/category_item.dart';
+import '../data.dart';
 
 class CategoriesScreen extends StatelessWidget {
   @override
@@ -14,7 +14,7 @@ class CategoriesScreen extends StatelessWidget {
         child: GridView(
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 300,
-              childAspectRatio: 1.99 / 2 /* Width/height*/,
+              childAspectRatio: 2.5 / 2 /* Width/height*/,
               crossAxisSpacing: 20,
               mainAxisSpacing:
                   20), // Sliver is a scrollable area on the screen. Grid delegate takes care of the structuring of the grid. With max cross axis extent lets us define the max width of each grid item.

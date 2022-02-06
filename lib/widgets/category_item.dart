@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meal_dash/meal_category_screen.dart';
+import 'package:meal_dash/screens/meal_category_screen.dart';
 
 class CategoryItem extends StatelessWidget {
   final String categoryId;
@@ -47,7 +47,7 @@ class CategoryItem extends StatelessWidget {
             Image.asset(
               categoryImage,
               width: 100,
-              height: 80,
+              height: 65,
               fit: BoxFit.cover,
             ),
           ],

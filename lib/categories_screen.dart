@@ -3,8 +3,6 @@ import 'category_item.dart';
 import 'category_data.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +19,8 @@ class CategoriesScreen extends StatelessWidget {
               mainAxisSpacing:
                   20), // Sliver is a scrollable area on the screen. Grid delegate takes care of the structuring of the grid. With max cross axis extent lets us define the max width of each grid item.
           children: categoryData
-              .map((item) => CategoryItem(item.title, item.color, item.image))
+              .map((item) =>
+                  CategoryItem(item.id, item.title, item.color, item.image))
               .toList(),
         ),
       ),

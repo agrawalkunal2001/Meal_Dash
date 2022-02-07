@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meal_dash/screens/meal_category_screen.dart';
+import 'package:meal_dash/screens/meal_detail_screen.dart';
 import 'screens/categories_screen.dart';
 
 void main() {
@@ -34,7 +35,16 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         "/": (ctx) => CategoriesScreen(),
-        MealCategoryScreen.routeName: (ctx) => MealCategoryScreen()
+        MealCategoryScreen.routeName: (ctx) => MealCategoryScreen(),
+        MealDetailScreen.routeName: (ctx) => MealDetailScreen()
+      },
+      onGenerateRoute: (settings) {
+        // This function runs when a navigation is to occur and the route is not registered in the routes table above.
+        return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
+      },
+      onUnknownRoute: (settings) {
+        // This function runs when there is no available route to run.
+        return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
       },
     );
   }

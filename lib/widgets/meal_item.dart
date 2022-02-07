@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:meal_dash/models/meal.dart';
+import 'package:meal_dash/screens/meal_detail_screen.dart';
 
 class MealItem extends StatelessWidget {
+  final String id;
   final String title;
   final String imageURL;
   final int duration;
@@ -9,7 +11,8 @@ class MealItem extends StatelessWidget {
   final Affordability affordability;
 
   MealItem(
-      {required this.title,
+      {required this.id,
+      required this.title,
       required this.imageURL,
       required this.duration,
       required this.complexity,
@@ -41,12 +44,14 @@ class MealItem extends StatelessWidget {
     }
   }
 
-  void selectMeal() {}
+  void selectMeal(BuildContext ctx) {
+    Navigator.of(ctx).pushNamed(MealDetailScreen.routeName, arguments: id);
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: selectMeal,
+      onTap: () => selectMeal(context),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         elevation: 5,
@@ -94,7 +99,7 @@ class MealItem extends StatelessWidget {
                       children: <Widget>[
                         Icon(Icons.schedule),
                         SizedBox(
-                          width: 5,
+                          width: 2,
                         ),
                         Text("$duration min"),
                       ],
@@ -105,7 +110,7 @@ class MealItem extends StatelessWidget {
                       children: <Widget>[
                         Icon(Icons.work),
                         SizedBox(
-                          width: 5,
+                          width: 2,
                         ),
                         Text(complexityText),
                       ],
@@ -116,7 +121,7 @@ class MealItem extends StatelessWidget {
                       children: <Widget>[
                         Icon(Icons.attach_money),
                         SizedBox(
-                          width: 5,
+                          width: 2,
                         ),
                         Text(affordabilityText),
                       ],

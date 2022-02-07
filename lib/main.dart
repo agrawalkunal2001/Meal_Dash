@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meal_dash/screens/filters_screen.dart';
 import 'package:meal_dash/screens/meal_category_screen.dart';
 import 'package:meal_dash/screens/meal_detail_screen.dart';
 import 'package:meal_dash/screens/tabs_screen.dart';
@@ -37,7 +38,8 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": (ctx) => TabsScreen(),
         MealCategoryScreen.routeName: (ctx) => MealCategoryScreen(),
-        MealDetailScreen.routeName: (ctx) => MealDetailScreen()
+        MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
+        FiltersScreen.routeName: (ctx) => FiltersScreen(),
       },
       onGenerateRoute: (settings) {
         // This function runs when a navigation is to occur and the route is not registered in the routes table above.

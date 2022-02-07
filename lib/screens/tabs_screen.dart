@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meal_dash/screens/categories_screen.dart';
 import 'package:meal_dash/screens/starred_screen.dart';
+import 'package:meal_dash/widgets/main_drawer.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({Key? key}) : super(key: key);
@@ -62,11 +63,6 @@ class _TabsScreenState extends State<TabsScreen> {
       appBar: AppBar(
         title: Text(_pages[_selectedPageIndex]["title"] as String),
         actions: <Widget>[
-          Icon(
-            Icons.food_bank,
-            color: Theme.of(context).accentColor,
-            size: 40,
-          ),
           Container(
             padding: EdgeInsets.all(12),
             child: Text("Meal Dash",
@@ -77,6 +73,7 @@ class _TabsScreenState extends State<TabsScreen> {
           )
         ],
       ),
+      drawer: MainDrawer(),
       body: _pages[_selectedPageIndex]["page"] as Widget,
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,

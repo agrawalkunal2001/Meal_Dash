@@ -9,6 +9,7 @@ class MealItem extends StatelessWidget {
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
+  final Function removeItem;
 
   MealItem(
       {required this.id,
@@ -16,7 +17,8 @@ class MealItem extends StatelessWidget {
       required this.imageURL,
       required this.duration,
       required this.complexity,
-      required this.affordability});
+      required this.affordability,
+      required this.removeItem});
 
   String get complexityText {
     switch (complexity) {
@@ -45,7 +47,14 @@ class MealItem extends StatelessWidget {
   }
 
   void selectMeal(BuildContext ctx) {
-    Navigator.of(ctx).pushNamed(MealDetailScreen.routeName, arguments: id);
+    Navigator.of(ctx)
+        .pushNamed(MealDetailScreen.routeName, arguments: id)
+        .then((result) {
+      // This function is executed when the meal detail screen is popped off the screen and not when it is pushed on. The result argument is the one passed in meal detail screen as an argument in pop function.
+      if (result != null) {
+        removeItem(result);
+      }
+    });
   }
 
   @override

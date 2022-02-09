@@ -27,6 +27,7 @@ class _MyAppState extends State<MyApp> {
   };
 
   List<Meal> _availableMeals = mealData;
+  List<Meal> _starredMeals = [];
 
   void _setFilters(Map<String, bool> filterData) {
     setState(() {
@@ -46,8 +47,27 @@ class _MyAppState extends State<MyApp> {
         }
         return true;
       }).toList();
-      Navigator.pushNamed(context, MealCategoryScreen.routeName);
     });
+  }
+
+  void _toggleStarred(String mealId) {
+    final existingMeal =
+        _starredMeals.indexWhere((element) => element.id == mealId);
+    if (existingMeal >= 0) {
+      // Meal already existes in starred screen. So, toggling it should remove the meal.
+      setState(() {
+        _starredMeals.removeAt(existingMeal);
+      });
+    } else {
+      setState(() {
+        _starredMeals
+            .add(mealData.firstWhere((element) => element.id == mealId));
+      });
+    }
+  }
+
+  bool _isStarred(String id) {
+    return _starredMeals.any((element) => element.id == id);
   }
 
   @override
@@ -74,10 +94,11 @@ class _MyAppState extends State<MyApp> {
             )),
       ),
       routes: {
-        "/": (ctx) => TabsScreen(),
+        "/": (ctx) => TabsScreen(_starredMeals),
         MealCategoryScreen.routeName: (ctx) =>
             MealCategoryScreen(_availableMeals),
-        MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
+        MealDetailScreen.routeName: (ctx) =>
+            MealDetailScreen(_toggleStarred, _isStarred),
         FiltersScreen.routeName: (ctx) => FiltersScreen(_filters, _setFilters),
       },
       onGenerateRoute: (settings) {

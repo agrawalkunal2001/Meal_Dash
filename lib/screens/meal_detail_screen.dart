@@ -4,6 +4,11 @@ import 'package:meal_dash/data.dart';
 class MealDetailScreen extends StatelessWidget {
   static const routeName = "/meal-detail";
 
+  final Function toggleStarred;
+  final Function isStarred;
+
+  MealDetailScreen(this.toggleStarred, this.isStarred);
+
   @override
   Widget build(BuildContext context) {
     final mealId = ModalRoute.of(context)!.settings.arguments as String;
@@ -90,10 +95,12 @@ class MealDetailScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.delete),
+        child: Icon(isStarred(mealId) ? Icons.star : Icons.star_border),
         onPressed: () {
-          Navigator.of(context)
-              .pop(); // Removes the meal detail screen and goes back to meal item screen.
+          // Navigator.of(context)
+          //     .pop(); // Removes the meal detail screen and goes back to meal item screen.
+
+          toggleStarred(mealId);
         },
       ),
     );

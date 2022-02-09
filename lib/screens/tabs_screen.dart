@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:meal_dash/models/meal.dart';
 import 'package:meal_dash/screens/categories_screen.dart';
 import 'package:meal_dash/screens/starred_screen.dart';
 import 'package:meal_dash/widgets/main_drawer.dart';
 
 class TabsScreen extends StatefulWidget {
-  const TabsScreen({Key? key}) : super(key: key);
+  final List<Meal> favouriteMeals;
+
+  TabsScreen(this.favouriteMeals);
 
   @override
   _TabsScreenState createState() => _TabsScreenState();
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  final List<Map<String, Object>> _pages = [
-    {"page": CategoriesScreen(), "title": "Categories"},
-    {"page": StarredScreen(), "title": "Starred"}
-  ];
+  late List<Map<String, Object>> _pages;
   int _selectedPageIndex = 0; // To decide what to show when a tab is selected.
+
+  @override
+  void initState() {
+    _pages = [
+      {"page": CategoriesScreen(), "title": "Categories"},
+      {"page": StarredScreen(widget.favouriteMeals), "title": "Starred"}
+    ];
+    super.initState();
+  }
 
   void _selectPage(
       int index /* Flutter automatically gives the index of selected tab*/) {

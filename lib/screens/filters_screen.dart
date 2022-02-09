@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:meal_dash/screens/meal_category_screen.dart';
 import 'package:meal_dash/widgets/main_drawer.dart';
 
 class FiltersScreen extends StatefulWidget {
-  const FiltersScreen({Key? key}) : super(key: key);
   static const routeName = "/filters";
+
+  final Map<String, bool> currentFilters;
+  final Function saveFilters;
+
+  FiltersScreen(this.currentFilters, this.saveFilters);
+
   @override
   _FiltersScreenState createState() => _FiltersScreenState();
 }
@@ -15,19 +21,31 @@ class _FiltersScreenState extends State<FiltersScreen> {
   var _vegetarian = false;
 
   @override
+  void initState() {
+    _glutenFree = widget.currentFilters["gluten"] as bool;
+    _lactoseFree = widget.currentFilters["lactose"] as bool;
+    _vegan = widget.currentFilters["vegan"] as bool;
+    _vegetarian = widget.currentFilters["vegetarian"] as bool;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Filters"),
         actions: <Widget>[
-          Container(
-            padding: EdgeInsets.all(12),
-            child: Text("Meal Dash",
-                style: TextStyle(
-                    color: Theme.of(context).accentColor,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold)),
-          )
+          IconButton(
+              onPressed: () {
+                final _selectedFilters = {
+                  "gluten": _glutenFree,
+                  "lactose": _lactoseFree,
+                  "vegan": _vegan,
+                  "vegetarian": _vegetarian
+                };
+                widget.saveFilters(_selectedFilters);
+              },
+              icon: Icon(Icons.check)),
         ],
       ),
       drawer: MainDrawer(),

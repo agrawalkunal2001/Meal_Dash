@@ -6,12 +6,16 @@ import 'package:meal_dash/widgets/meal_item.dart';
 class MealCategoryScreen extends StatefulWidget {
   static const routeName = "/meal-category";
 
+  final List<Meal> availableMeals;
+
+  MealCategoryScreen(this.availableMeals);
+
   @override
   State<MealCategoryScreen> createState() => _MealCategoryScreenState();
 }
 
 class _MealCategoryScreenState extends State<MealCategoryScreen> {
-  // Converted to stateful widget to add remoce meal function which removes a meal from meal category screen after it is popped.
+  // Converted to stateful widget to add remove meal function which removes a meal from meal category screen after it is popped.
   String? categoryTitle;
   List<Meal>? categoryMeal;
   bool _loadInit = false;
@@ -38,7 +42,7 @@ class _MealCategoryScreenState extends State<MealCategoryScreen> {
           as Map<String, String>; // In CategoryItem, arguments is a map.
       final categoryId = routeArgs["id"];
       categoryTitle = routeArgs["title"];
-      categoryMeal = mealData.where((meal) {
+      categoryMeal = widget.availableMeals.where((meal) {
         return meal.categories.contains(categoryId);
       }).toList();
       _loadInit = true;
